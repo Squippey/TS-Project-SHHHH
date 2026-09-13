@@ -1,4 +1,3 @@
-import './style.css';
 import { AppContainer } from './componentFunctions/components.js';
 import { setRacoonFavicon } from './componentFunctions/function.js';
 
