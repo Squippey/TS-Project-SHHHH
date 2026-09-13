@@ -1,15 +1,7 @@
-import PropTypes from 'prop-types';
-import { ClickHeartEffect } from './function';
-
-// Helper pentru apelarea verificării de PropTypes în Vanilla JS / TypeScript
-const validateProps = (componentName: string, props: any, propTypes: any) => {
-  PropTypes.checkPropTypes(propTypes, props, 'prop', componentName);
-};
+import { ClickHeartEffect } from './function.js';
 
 // --- 1. RACOON SIDE DECOR ---
-export const RacoonSideDecor = (props: any = {}) => {
-  validateProps('RacoonSideDecor', props, RacoonSideDecor.propTypes);
-
+export const RacoonSideDecor = (props = {}) => {
   const { count = 14 } = props;
 
   const container = document.createElement("div");
@@ -39,15 +31,9 @@ export const RacoonSideDecor = (props: any = {}) => {
   return container;
 };
 
-RacoonSideDecor.propTypes = {
-  count: PropTypes.number
-};
-
 // --- 2. HEADER CONTAINER ---
-export const HeaderContainer = (props: any) => {
-  validateProps('HeaderContainer', props, HeaderContainer.propTypes);
-
-  const { title, startDate } = props;
+export const HeaderContainer = (props = {}) => {
+  const { title = "", startDate = new Date() } = props;
 
   const header = document.createElement("header");
 
@@ -66,21 +52,14 @@ export const HeaderContainer = (props: any) => {
   return header;
 };
 
-HeaderContainer.propTypes = {
-  title: PropTypes.string.isRequired,
-  startDate: PropTypes.string.isRequired
-};
-
 // --- 3. TIMELINE CONTAINER ---
-export const TimelineContainer = (props: any) => {
-  validateProps('TimelineContainer', props, TimelineContainer.propTypes);
-
-  const { events } = props;
+export const TimelineContainer = (props = {}) => {
+  const { events = [] } = props;
 
   const container = document.createElement("div");
   container.className = "timeline";
 
-  events.forEach((ev: any) => {
+  events.forEach((ev) => {
     const item = document.createElement("div");
     item.className = "timeline-event";
 
@@ -102,21 +81,9 @@ export const TimelineContainer = (props: any) => {
   return container;
 };
 
-TimelineContainer.propTypes = {
-  events: PropTypes.arrayOf(
-    PropTypes.shape({
-      date: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired
-    })
-  ).isRequired
-};
-
 // --- 4. LETTER CONTAINER ---
-export const LetterContainer = (props: any) => {
-  validateProps('LetterContainer', props, LetterContainer.propTypes);
-
-  const { title, paragraphs, signature } = props;
+export const LetterContainer = (props = {}) => {
+  const { title = "", paragraphs = [], signature = "" } = props;
 
   const letterBox = document.createElement("div");
   letterBox.className = "letter-box";
@@ -125,7 +92,7 @@ export const LetterContainer = (props: any) => {
   h2.textContent = title;
   letterBox.appendChild(h2);
 
-  paragraphs.forEach((text: string) => {
+  paragraphs.forEach((text) => {
     const p = document.createElement("p");
     p.textContent = text;
     letterBox.appendChild(p);
@@ -139,16 +106,8 @@ export const LetterContainer = (props: any) => {
   return letterBox;
 };
 
-LetterContainer.propTypes = {
-  title: PropTypes.string.isRequired,
-  paragraphs: PropTypes.arrayOf(PropTypes.string).isRequired,
-  signature: PropTypes.string.isRequired
-};
-
 // --- 5. MAIN APP CONTAINER (WRAPPER) ---
-export const AppContainer = (props: any) => {
-  validateProps('AppContainer', props, AppContainer.propTypes);
-
+export const AppContainer = (props = {}) => {
   const { title, startDate, events, letterTitle, paragraphs, signature, racoonCount } = props;
 
   ClickHeartEffect({ emojis: ["❤️", "💖", "💕", "✨"], maxHearts: 2 });
@@ -166,14 +125,4 @@ export const AppContainer = (props: any) => {
   root.append(racoons, header, mainContainer);
 
   return root;
-};
-
-AppContainer.propTypes = {
-  title: PropTypes.string.isRequired,
-  startDate: PropTypes.string.isRequired,
-  events: PropTypes.array.isRequired,
-  letterTitle: PropTypes.string.isRequired,
-  paragraphs: PropTypes.arrayOf(PropTypes.string).isRequired,
-  signature: PropTypes.string.isRequired,
-  racoonCount: PropTypes.number
 };

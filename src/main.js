@@ -1,6 +1,6 @@
 import './style.css';
-import { AppContainer } from './componentFunctions/components';
-import { setRacoonFavicon } from './componentFunctions/function';
+import { AppContainer } from './componentFunctions/components.js';
+import { setRacoonFavicon } from './componentFunctions/function.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   setRacoonFavicon();
