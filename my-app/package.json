@@ -13,6 +13,7 @@
     "vite": "^8.3.0"
   },
   "dependencies": {
-    "@totalsoft/rocket-ui": "^2.0.5"
+    "@totalsoft/rocket-ui": "^2.0.5",
+    "prop-types": "^15.8.1"
   }
 }
